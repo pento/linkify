@@ -53,11 +53,16 @@ function pasteTrac( e, editor, pasted, start, end ) {
 	e.preventDefault();
 	editor.value = editor.value.slice( 0, start ) + '[' + pasted + ' ' + editor.value.slice( start, end ) + ']' + editor.value.slice( end, editor.value.length );
 
+	var newPos = end + pasted.length + 3;
+	editor.setSelectionRange( newPos, newPos );
 }
 
 function pasteMarkdown( e, editor, pasted, start, end ) {
 	e.preventDefault();
 	editor.value = editor.value.slice( 0, start ) + '[' + editor.value.slice( start, end ) + '](' + pasted + ')' + editor.value.slice( end, editor.value.length );
+
+	var newPos = end + pasted.length + 4;
+	editor.setSelectionRange( newPos, newPos );
 }
 
 function pasteHTML( e, editor, pasted, start, end ) {
@@ -77,4 +82,7 @@ function pasteHTML( e, editor, pasted, start, end ) {
 	// Looks safe, let's do this.
 	e.preventDefault();
 	editor.value = editor.value.slice( 0, start ) + '<a href="' + pasted + '">' + editor.value.slice( start, end ) + '</a>' + editor.value.slice( end, editor.value.length );
+
+	var newPos = end + pasted.length + 15;
+	editor.setSelectionRange( newPos, newPos );
 }
