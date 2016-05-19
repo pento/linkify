@@ -38,7 +38,7 @@ function pasteHandler( e ) {
 	}
 
 	var tracForm = document.getElementById( 'propertyform' );
-	if( tracForm && tracForm.action.indexOf( '/newticket' ) >= 0 ) {
+	if( tracForm && ( tracForm.getAttribute( 'action' ).indexOf( '/newticket' ) >= 0 || tracForm.getAttribute( 'action' ).indexOf( '/ticket/' ) >= 0 ) ) {
 		pasteTrac( e, editor, pasted, start, end );
 	} else if ( 'github.com' === document.domain ) {
 		pasteMarkdown( e, editor, pasted, start, end );
