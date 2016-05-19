@@ -37,7 +37,10 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	if ( 'github.com' === document.domain ) {
+	var tracForm = document.getElementById( 'propertyform' );
+	if( tracForm && tracForm.action.indexOf( '/newticket' ) >= 0 ) {
+		pasteTrac( e, editor, pasted, start, end );
+	} else if ( 'github.com' === document.domain ) {
 		pasteMarkdown( e, editor, pasted, start, end );
 	} else {
 		pasteHTML( e, editor, pasted, start, end );
@@ -45,6 +48,12 @@ function pasteHandler( e ) {
 }
 
 document.addEventListener( 'paste', pasteHandler );
+
+function pasteTrac( e, editor, pasted, start, end ) {
+	e.preventDefault();
+	editor.value = editor.value.slice( 0, start ) + '[' + pasted + ' ' + editor.value.slice( start, end ) + ']' + editor.value.slice( end, editor.value.length );
+
+}
 
 function pasteMarkdown( e, editor, pasted, start, end ) {
 	e.preventDefault();
