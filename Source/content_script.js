@@ -14,7 +14,17 @@ function pasteHandler( e ) {
 
 	var editor = e.target;
 
-	if ( ! editor || 'TEXTAREA' !== editor.nodeName ) {
+	if ( ! editor ) {
+		return;
+	}
+
+	if ( editor.contentEditable ) {
+		e.preventDefault();
+		document.execCommand( 'createLink', false, pasted );
+		return;
+	}
+
+	if ( 'TEXTAREA' !== editor.nodeName ) {
 		return;
 	}
 
