@@ -112,11 +112,6 @@ if ( undefined !== blockedSites.find( blockedSitesCheck ) ) {
 	attach = false;
 }
 
-// Don't run in Kayako
-if ( document.title.includes( 'Powered by eSupport' ) || document.title.includes( 'Powered by Kayako Help Desk Software' ) ) {
-	attach = false;
-}
-
 if ( attach ) {
 	document.addEventListener( 'paste', pasteHandler );
 }
