@@ -18,7 +18,7 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	if ( editor.contentEditable ) {
+	if ( editor.contentEditable && 'TEXTAREA' !== editor.nodeName ) {
 		e.preventDefault();
 		document.execCommand( 'createLink', false, pasted );
 		return;
