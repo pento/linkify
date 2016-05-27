@@ -28,6 +28,11 @@ function pasteHandler( e ) {
 		return;
 	}
 
+	// Don't run in Kayako
+	if ( swiftpath || _swiftPath ) {
+		return;
+	}
+
 	if ( editor.contentEditable ) {
 		e.preventDefault();
 		document.execCommand( 'createLink', false, pasted );
