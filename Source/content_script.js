@@ -18,6 +18,11 @@ function pasteHandler( e ) {
 		return;
 	}
 
+	var blockedSites = [ 'twitter.com', 'facebook.com' ];
+	if ( undefined !== blockedSites.find( blockedSitesCheck ) ) {
+		return;
+	}
+
 	if ( editor.contentEditable ) {
 		e.preventDefault();
 		document.execCommand( 'createLink', false, pasted );
@@ -95,4 +100,8 @@ function pasteHTML( e, editor, pasted, start, end ) {
 
 	var newPos = end + pasted.length + 15;
 	editor.setSelectionRange( newPos, newPos );
+}
+
+function blockedSitesCheck( site ) {
+	return document.domain.includes( site );
 }
