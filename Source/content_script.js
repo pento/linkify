@@ -18,7 +18,12 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	var blockedSites = [ 'twitter.com', 'facebook.com' ];
+	var blockedSites = [
+		'gist.github.com'
+		'facebook.com',
+		'twitter.com'
+	];
+
 	if ( undefined !== blockedSites.find( blockedSitesCheck ) ) {
 		return;
 	}
