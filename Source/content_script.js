@@ -18,21 +18,6 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	var blockedSites = [
-		'gist.github.com'
-		'facebook.com',
-		'twitter.com'
-	];
-
-	if ( undefined !== blockedSites.find( blockedSitesCheck ) ) {
-		return;
-	}
-
-	// Don't run in Kayako
-	if ( swiftpath || _swiftPath ) {
-		return;
-	}
-
 	if ( editor.contentEditable ) {
 		e.preventDefault();
 		document.execCommand( 'createLink', false, pasted );
@@ -71,8 +56,6 @@ function pasteHandler( e ) {
 		pasteHTML( e, editor, pasted, start, end );
 	}
 }
-
-document.addEventListener( 'paste', pasteHandler );
 
 function pasteTrac( e, editor, pasted, start, end ) {
 	e.preventDefault();
@@ -115,3 +98,22 @@ function pasteHTML( e, editor, pasted, start, end ) {
 function blockedSitesCheck( site ) {
 	return document.domain.includes( site );
 }
+
+// Don't bother attaching the paste event if we're on a site we don't want to run on.
+
+var blockedSites = [
+	'gist.github.com',
+	'facebook.com',
+	'twitter.com'
+];
+
+if ( undefined !== blockedSites.find( blockedSitesCheck ) ) {
+	return;
+}
+
+// Don't run in Kayako
+if ( swiftpath || _swiftPath ) {
+	return;
+}
+
+document.addEventListener( 'paste', pasteHandler );
