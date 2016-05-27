@@ -100,6 +100,7 @@ function blockedSitesCheck( site ) {
 }
 
 // Don't bother attaching the paste event if we're on a site we don't want to run on.
+var attach = true;
 
 var blockedSites = [
 	'gist.github.com',
@@ -108,12 +109,14 @@ var blockedSites = [
 ];
 
 if ( undefined !== blockedSites.find( blockedSitesCheck ) ) {
-	return;
+	attach = false;
 }
 
 // Don't run in Kayako
-if ( swiftpath || _swiftPath ) {
-	return;
+if ( document.title.includes( 'Powered by eSupport' ) || document.title.includes( 'Powered by Kayako Help Desk Software' ) ) {
+	attach = false;
 }
 
-document.addEventListener( 'paste', pasteHandler );
+if ( attach ) {
+	document.addEventListener( 'paste', pasteHandler );
+}
