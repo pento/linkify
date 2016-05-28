@@ -24,7 +24,22 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	if ( 'TEXTAREA' !== editor.nodeName ) {
+	var inputTypeAllowed = false;
+
+	if ( 'TEXTAREA' === editor.nodeName ) {
+		inputTypeAllowed = true;
+	}
+
+	// Normally we don't want to do this on <input> tags, but there are exceptions.
+	var inputElementSites = [
+		'teuxdeux.com'
+	];
+
+	if ( 'INPUT' === editor.nodeName && 'text' === editor.type && inputElementSites.find( domainCheck ) ) {
+		inputTypeAllowed = true;
+	}
+
+	if ( ! inputTypeAllowed ) {
 		return;
 	}
 
@@ -43,10 +58,15 @@ function pasteHandler( e ) {
 		return;
 	}
 
+	var markdownSites = [
+		'github.com',
+		'teuxdeux.com'
+	];
+
 	var tracForm = document.getElementById( 'propertyform' );
 	if( tracForm && ( tracForm.getAttribute( 'action' ).indexOf( '/newticket' ) >= 0 || tracForm.getAttribute( 'action' ).indexOf( '/ticket/' ) >= 0 ) ) {
 		pasteTrac( e, editor, pasted, start, end );
-	} else if ( 'github.com' === document.domain ) {
+	} else if ( markdownSites.find( domainCheck ) ) {
 		pasteMarkdown( e, editor, pasted, start, end );
 	} else {
 		pasteHTML( e, editor, pasted, start, end );
@@ -112,7 +132,7 @@ function pasteHTML( e, editor, pasted, start, end ) {
 	editor.setSelectionRange( newPos, newPos );
 }
 
-function blockedSitesCheck( site ) {
+function domainCheck( site ) {
 	return document.domain.includes( site );
 }
 
@@ -125,7 +145,7 @@ var blockedSites = [
 	'twitter.com'
 ];
 
-if ( undefined !== blockedSites.find( blockedSitesCheck ) ) {
+if ( undefined !== blockedSites.find( domainCheck ) ) {
 	attach = false;
 }
 
