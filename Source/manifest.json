@@ -3,18 +3,15 @@
 	"name": "Linkify",
 	"version": "0.3",
 	"description": "Automatically transform pasted URLs into links.",
-	"icons":
-	{
+	"icons": {
 		 "16": "linkify-ico-16.png",
 		 "48": "linkify-ico-48.png",
 		"128": "linkify-ico-128.png"
 	},
-	"content_scripts":
-	[
-		{
-			"matches": ["*://*/*"],
-			"js": ["content_script.js"],
-			"run_at": "document_end"
+	"content_scripts": [ {
+			"matches": [ "*://*/*" ],
+			"js":      [ "content_script.js" ],
+			"run_at":  "document_end"
 		}
 	]
 }
