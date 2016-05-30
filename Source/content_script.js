@@ -149,6 +149,11 @@ if ( undefined !== blockedSites.find( domainCheck ) ) {
 	attach = false;
 }
 
+// Don't load on o2 sites, as they already have this feature.
+if ( document.body.classList.contains( 'o2' ) ) {
+	attach = false;
+}
+
 if ( attach ) {
 	document.addEventListener( 'paste', pasteHandler );
 }
