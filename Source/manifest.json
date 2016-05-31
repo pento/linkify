@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Linkify",
-	"version": "0.3",
+	"version": "0.4",
 	"description": "Automatically transform pasted URLs into links.",
 	"icons": {
 		 "16": "linkify-ico-16.png",
