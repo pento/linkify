@@ -60,6 +60,7 @@ function pasteHandler( e ) {
 
 	var markdownSites = [
 		'github.com',
+		'reddit.com',
 		'teuxdeux.com'
 	];
 
