@@ -64,11 +64,17 @@ function pasteHandler( e ) {
 		'teuxdeux.com'
 	];
 
+	var BBcodeSites = [
+		'forums.somethingawful.com'
+	];
+
 	var tracForm = document.getElementById( 'propertyform' );
 	if( tracForm && ( tracForm.getAttribute( 'action' ).indexOf( '/newticket' ) >= 0 || tracForm.getAttribute( 'action' ).indexOf( '/ticket/' ) >= 0 ) ) {
 		pasteTrac( e, editor, pasted, start, end );
 	} else if ( markdownSites.find( domainCheck ) ) {
 		pasteMarkdown( e, editor, pasted, start, end );
+	} else if ( BBcodeSites.find( domainCheck ) ) {
+		pasteBBcode( e, editor, pasted, start, end );
 	} else {
 		pasteHTML( e, editor, pasted, start, end );
 	}
@@ -99,6 +105,21 @@ function pasteMarkdown( e, editor, pasted, start, end ) {
 		newPos = start + 1;
 	} else {
 		newPos = end + pasted.length + 4;
+	}
+
+	editor.setSelectionRange( newPos, newPos );
+}
+
+function pasteBBcode( e, editor, pasted, start, end ) {
+	e.preventDefault();
+	editor.value = editor.value.slice( 0, start ) + '[url=' + pasted + ']' + editor.value.slice( start, end ) + '[/url]' + editor.value.slice( end, editor.value.length );
+
+	var newPos;
+
+	if ( start === end ) {
+		newPos = start + pasted.length + 6;
+	} else {
+		newPos = end + pasted.length + 12;
 	}
 
 	editor.setSelectionRange( newPos, newPos );
