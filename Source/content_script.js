@@ -164,7 +164,8 @@ var attach = true;
 var blockedSites = [
 	'gist.github.com',
 	'facebook.com',
-	'twitter.com'
+	'twitter.com',
+	'whatsapp.com'
 ];
 
 if ( undefined !== blockedSites.find( domainCheck ) ) {
