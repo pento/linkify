@@ -64,16 +64,17 @@ function pasteHandler( e ) {
 		'teuxdeux.com'
 	];
 
-	var BBcodeSites = [
-		'forums.somethingawful.com'
-	];
+	var bbCodeEl = document.getElementById( 'disable_bbcode' );
+	if ( ! bbCodeEl ) {
+		bbCodeEl = document.getElementsByClassName( 'show_bbcode' ).item( 0 );
+	}
 
 	var tracForm = document.getElementById( 'propertyform' );
 	if( tracForm && ( tracForm.getAttribute( 'action' ).indexOf( '/newticket' ) >= 0 || tracForm.getAttribute( 'action' ).indexOf( '/ticket/' ) >= 0 ) ) {
 		pasteTrac( e, editor, pasted, start, end );
 	} else if ( markdownSites.find( domainCheck ) ) {
 		pasteMarkdown( e, editor, pasted, start, end );
-	} else if ( BBcodeSites.find( domainCheck ) ) {
+	} else if ( bbCodeEl ) {
 		pasteBBcode( e, editor, pasted, start, end );
 	} else {
 		pasteHTML( e, editor, pasted, start, end );
