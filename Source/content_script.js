@@ -164,6 +164,7 @@ var attach = true;
 var blockedSites = [
 	'gist.github.com',
 	'facebook.com',
+	'slack.com',
 	'twitter.com',
 	'whatsapp.com'
 ];
