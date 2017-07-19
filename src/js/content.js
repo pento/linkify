@@ -18,6 +18,11 @@ function pasteHandler( e ) {
 		return;
 	}
 
+	// Don't run in WordPress' Gutenberg editor.
+	if ( editor.closest( '.gutenberg' ) ) {
+		return;
+	}
+
 	if ( editor.isContentEditable ) {
 		e.preventDefault();
 		document.execCommand( 'createLink', false, pasted );
