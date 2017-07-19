@@ -3,6 +3,7 @@ mykey.pem
 node_modules
 npm-debug.log
 build/*.crx
+build/*.zip
 build/dev
 build/prod
 build/updates.xml

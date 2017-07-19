@@ -2,6 +2,7 @@ const _ = require('lodash');
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ZipWebpackPlugin = require('zip-webpack-plugin');
 const VersionFilePlugin = require('webpack-version-file-plugin');
 const CrxPlugin = require('crx-webpack-plugin');
 
@@ -49,5 +50,9 @@ module.exports = _.merge({}, config, {
         screw_ie8: true
       }
     }),
+    new ZipWebpackPlugin({
+      path: '..',
+      filename: pkg.name
+    })
   ]
 });
