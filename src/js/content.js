@@ -81,6 +81,8 @@ function pasteHandler( e ) {
 		pasteMarkdown( e, editor, pasted, start, end );
 	} else if ( bbCodeEl ) {
 		pasteBBcode( e, editor, pasted, start, end );
+	} else if ( editor.classList.contains( 'remarkup-assist-textarea' ) ) {
+		pasteRemarkup( e, editor, pasted, start, end );
 	} else {
 		pasteHTML( e, editor, pasted, start, end );
 	}
@@ -126,6 +128,21 @@ function pasteBBcode( e, editor, pasted, start, end ) {
 		newPos = start + pasted.length + 6;
 	} else {
 		newPos = end + pasted.length + 12;
+	}
+
+	editor.setSelectionRange( newPos, newPos );
+}
+
+function pasteRemarkup( e, editor, pasted, start, end ) {
+	e.preventDefault();
+	editor.value = editor.value.slice( 0, start ) + '[[ ' + pasted + ' || ' + editor.value.slice( start, end ) + ' ]]' + editor.value.slice( end, editor.value.length );
+
+	var newPos;
+
+	if ( start === end ) {
+		newPos = start + pasted.length + 7;
+	} else {
+		newPos = end + pasted.length + 10;
 	}
 
 	editor.setSelectionRange( newPos, newPos );
