@@ -1,4 +1,10 @@
+var shiftPressed = false;
+
 function pasteHandler( e ) {
+	if ( shiftPressed ) {
+		return;
+	}
+
 	if ( 'undefined' === typeof( e.clipboardData ) ) {
 		return;
 	}
@@ -86,6 +92,10 @@ function pasteHandler( e ) {
 	} else {
 		pasteHTML( e, editor, pasted, start, end );
 	}
+}
+
+function shiftChecker( e ) {
+	shiftPressed = e.shiftKey;
 }
 
 function pasteTrac( e, editor, pasted, start, end ) {
@@ -203,4 +213,5 @@ if ( document.body.classList.contains( 'o2' ) ) {
 
 if ( attach ) {
 	document.addEventListener( 'paste', pasteHandler );
+	document.addEventListener( 'keydown', shiftChecker );
 }
