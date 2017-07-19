@@ -7,7 +7,7 @@
     "npm": "3.10.8"
   },
   "scripts": {
-    "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
+    "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js && cp ./build/$npm_package_name-$npm_package_version.crx ./dist/$npm_package_name.crx",
     "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
     "lint": "eslint src/js/",
     "test": "mocha-webpack --watch --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
@@ -37,8 +37,7 @@
     "webpack": "2.2.1",
     "webpack-dev-server": "1.16.2",
     "webpack-node-externals": "1.5.4",
-    "webpack-version-file-plugin": "0.2.2",
-    "webpack-shell-plugin": "0.5.0"
+    "webpack-version-file-plugin": "0.2.2"
   },
   "export-symbol": "extensionLinkify.exports"
 }
