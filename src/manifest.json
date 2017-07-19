@@ -17,8 +17,16 @@
 		}
 	],
 
+	"options_ui": {
+		"page": "html/options.html",
+		"chrome_style": true
+	},
+
 	"content_security_policy": "script-src 'self'; object-src 'self'",
-	"permissions": [ "<all_urls>" ],
+	"permissions": [
+		"<all_urls>",
+		"storage"
+	],
 	"web_accessible_resources": [ "js/*", "html/*", "css/*", "images/*" ]
 }
 

@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   entry: {
     content: './src/js/content',
+    options: './src/js/options',
   },
   output: {
     filename: './js/[name].js'
