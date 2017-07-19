@@ -1,6 +1,6 @@
 {
   "name": "Linkify",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Automatically transform pasted URLs into links.",
   "engines": {
     "node": "7.0.0",
