@@ -32,6 +32,10 @@ Then to start a developing session (with watch), run:
 
     npm start
 
+This will create an unpacked version of Linkify in the `build/dev` directory, which you can load in Chrome using the `Load unpacked extension...` button in your [Chrome Extensions](chrome://extensions/) page.
+
+![Linkify running as an unpacked extension, with the `Load unpacked extension...` button displayed](assets/screenshots/load-chrome-extension.png)
+
 To start a unit testing session (with watch):
 
     npm test
