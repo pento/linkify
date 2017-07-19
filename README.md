@@ -5,4 +5,37 @@ WordPress has an excellent feature, where pasting a URL onto selected text will 
 
 Now you can do it everywhere!
 
-[Chrome Web Store](https://chrome.google.com/webstore/detail/linkify/bkkgikibkmalecfagnebbhbacnbhckmh) | [Direct download of crx file](https://github.com/pento/linkify/blob/master/Linkify.crx?raw=true)
+## Installation
+
+[Chrome Web Store](https://chrome.google.com/webstore/detail/linkify/bkkgikibkmalecfagnebbhbacnbhckmh) | [Direct download of crx file](https://github.com/pento/linkify/blob/master/dist/Linkify.crx?raw=true)
+
+## Screenshots
+
+![Pasting a link in WordPress' Quick Draft](assets/screenshots/1.png) ![Pasting a link GMail](assets/screenshots/2.png)
+
+## Development
+
+### Installation
+    git@github.com:pento/linkify.git
+
+    # If you don't have webpack installed:
+    npm install -g webpack
+
+### Build instructions
+
+To install dependencies:
+
+    cd linkify
+    npm install
+
+Then to start a developing session (with watch), run:
+
+    npm start
+
+To start a unit testing session (with watch):
+
+    npm test
+
+To build production code + crx (requires `mykey.pem`):
+
+    npm run build
