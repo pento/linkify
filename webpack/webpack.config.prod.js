@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VersionFilePlugin = require('webpack-version-file-plugin');
 const CrxPlugin = require('crx-webpack-plugin');
-const ShellPlugin = require('webpack-shell-plugin');
 
 const config = require('./config.js');
 const pkg = require('../package.json');
@@ -49,9 +48,6 @@ module.exports = _.merge({}, config, {
         comments: false,
         screw_ie8: true
       }
-    }),
-    new ShellPlugin({
-      onBuildEnd: 'cp build/' + appName + '.crx dist/' + `${pkg.name}.crx`,
     }),
   ]
 });
