@@ -90,7 +90,7 @@ function pasteHandler( e ) {
 
 function pasteTrac( e, editor, pasted, start, end ) {
 	e.preventDefault();
-	editor.value = editor.value.slice( 0, start ) + '[' + pasted + ' ' + editor.value.slice( start, end ) + ']' + editor.value.slice( end, editor.value.length );
+	document.execCommand( 'insertText', false, '[' + pasted + ' ' + editor.value.slice( start, end ) + ']' );
 
 	var newPos;
 
@@ -105,7 +105,7 @@ function pasteTrac( e, editor, pasted, start, end ) {
 
 function pasteMarkdown( e, editor, pasted, start, end ) {
 	e.preventDefault();
-	editor.value = editor.value.slice( 0, start ) + '[' + editor.value.slice( start, end ) + '](' + pasted + ')' + editor.value.slice( end, editor.value.length );
+	document.execCommand( 'insertText', false, '[' + editor.value.slice( start, end ) + '](' + pasted + ')' );
 
 	var newPos;
 
@@ -120,7 +120,7 @@ function pasteMarkdown( e, editor, pasted, start, end ) {
 
 function pasteBBcode( e, editor, pasted, start, end ) {
 	e.preventDefault();
-	editor.value = editor.value.slice( 0, start ) + '[url=' + pasted + ']' + editor.value.slice( start, end ) + '[/url]' + editor.value.slice( end, editor.value.length );
+	document.execCommand( 'insertText', false, '[url=' + pasted + ']' + editor.value.slice( start, end ) + '[/url]' );
 
 	var newPos;
 
@@ -135,7 +135,7 @@ function pasteBBcode( e, editor, pasted, start, end ) {
 
 function pasteRemarkup( e, editor, pasted, start, end ) {
 	e.preventDefault();
-	editor.value = editor.value.slice( 0, start ) + '[[ ' + pasted + ' || ' + editor.value.slice( start, end ) + ' ]]' + editor.value.slice( end, editor.value.length );
+	document.execCommand( 'insertText', false, '[[ ' + pasted + ' || ' + editor.value.slice( start, end ) + ' ]]' );
 
 	var newPos;
 
@@ -164,7 +164,7 @@ function pasteHTML( e, editor, pasted, start, end ) {
 
 	// Looks safe, let's do this.
 	e.preventDefault();
-	editor.value = editor.value.slice( 0, start ) + '<a href="' + pasted + '">' + editor.value.slice( start, end ) + '</a>' + editor.value.slice( end, editor.value.length );
+	document.execCommand( 'insertText', false, '<a href="' + pasted + '">' + editor.value.slice( start, end ) + '</a>' );
 
 	var newPos;
 
