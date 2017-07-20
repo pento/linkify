@@ -1,5 +1,6 @@
 .DS_Store
 mykey.pem
+mozilla.json
 node_modules
 npm-debug.log
 build/*.crx
@@ -7,5 +8,6 @@ build/*.zip
 build/dev
 build/prod
 build/updates.xml
+web-ext-artifacts
 .tmp
 *.swp

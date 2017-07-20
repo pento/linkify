@@ -9,7 +9,9 @@ Now you can do it everywhere!
 
 ## Installation
 
-[Chrome Web Store](https://chrome.google.com/webstore/detail/linkify/bkkgikibkmalecfagnebbhbacnbhckmh) | [Direct download of crx file](https://github.com/pento/linkify/blob/master/dist/Linkify.crx?raw=true)
+[Chrome Web Store](https://chrome.google.com/webstore/detail/linkify/bkkgikibkmalecfagnebbhbacnbhckmh) | [Firefox Extensions](https://addons.mozilla.org/en-US/firefox/addon/linkify-magic-links/)
+
+[Chrome Direct Download](https://github.com/pento/linkify/blob/master/dist/Linkify.crx?raw=true) | [Firefox Direct Download](https://github.com/pento/linkify/blob/master/dist/linkify.xpi?raw=true)
 
 ## Screenshots
 
@@ -39,6 +41,6 @@ To start a unit testing session (with watch):
 
     npm test
 
-To build production code + crx (requires `mykey.pem`):
+To build production code (requires `mykey.pem` and `mozilla.json`):
 
     npm run build

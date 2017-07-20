@@ -5,9 +5,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ZipWebpackPlugin = require('zip-webpack-plugin');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const CrxPlugin = require('crx-webpack-plugin');
+const WebpackWebExt = require('webpack-webext-plugin');
 
 const config = require('./config.js');
 const pkg = require('../package.json');
+const mozilla = require('../mozilla.json');
 
 const appName = `${pkg.name}-${pkg.version}`;
 
@@ -63,6 +65,15 @@ module.exports = _.merge({}, config, {
     new ZipWebpackPlugin({
       path: '..',
       filename: pkg.name
-    })
+    }),
+    /*new WebpackWebExt({
+      runOnce: false,
+      argv: [
+        "sign",
+        "--api-key", mozilla.apikey,
+        "--api-secret", mozilla.apisecret,
+        "--source-dir", "./build/prod",
+        "--artifacts-dir", "./build" ],
+    }),*/
   ]
 });
