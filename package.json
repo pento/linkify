@@ -37,8 +37,8 @@
     "webpack": "2.2.1",
     "webpack-dev-server": "1.16.2",
     "webpack-node-externals": "1.5.4",
-    "webpack-version-file-plugin": "0.2.2",
-    "zip-webpack-plugin": "2.0.0"
+    "zip-webpack-plugin": "2.0.0",
+    "generate-json-webpack-plugin": "0.2.1"
   },
   "export-symbol": "extensionLinkify.exports"
 }
