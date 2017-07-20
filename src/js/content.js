@@ -1,5 +1,7 @@
 let shiftPressed = false;
 
+var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
 function pasteHandler( e ) {
 	if ( shiftPressed ) {
 		return;
@@ -104,7 +106,7 @@ function shiftChecker( e ) {
 
 function pasteTrac( e, editor, pasted, start, end ) {
 	e.preventDefault();
-	document.execCommand( 'insertText', false, '[' + pasted + ' ' + editor.value.slice( start, end ) + ']' );
+	insertText( '[' + pasted + ' ' + editor.value.slice( start, end ) + ']', editor, start, end );
 
 	let newPos;
 
@@ -119,7 +121,7 @@ function pasteTrac( e, editor, pasted, start, end ) {
 
 function pasteMarkdown( e, editor, pasted, start, end ) {
 	e.preventDefault();
-	document.execCommand( 'insertText', false, '[' + editor.value.slice( start, end ) + '](' + pasted + ')' );
+	insertText( '[' + editor.value.slice( start, end ) + '](' + pasted + ')', editor, start, end );
 
 	let newPos;
 
@@ -134,7 +136,7 @@ function pasteMarkdown( e, editor, pasted, start, end ) {
 
 function pasteBBcode( e, editor, pasted, start, end ) {
 	e.preventDefault();
-	document.execCommand( 'insertText', false, '[url=' + pasted + ']' + editor.value.slice( start, end ) + '[/url]' );
+	insertText( '[url=' + pasted + ']' + editor.value.slice( start, end ) + '[/url]', editor, start, end );
 
 	let newPos;
 
@@ -149,7 +151,7 @@ function pasteBBcode( e, editor, pasted, start, end ) {
 
 function pasteRemarkup( e, editor, pasted, start, end ) {
 	e.preventDefault();
-	document.execCommand( 'insertText', false, '[[ ' + pasted + ' | ' + editor.value.slice( start, end ) + ' ]]' );
+	insertText( '[[ ' + pasted + ' | ' + editor.value.slice( start, end ) + ' ]]', editor, start, end );
 
 	let newPos;
 
@@ -178,7 +180,7 @@ function pasteHTML( e, editor, pasted, start, end ) {
 
 	// Looks safe, let's do this.
 	e.preventDefault();
-	document.execCommand( 'insertText', false, '<a href="' + pasted + '">' + editor.value.slice( start, end ) + '</a>' );
+	insertText( '<a href="' + pasted + '">' + editor.value.slice( start, end ) + '</a>', editor, start, end );
 
 	let newPos;
 
@@ -189,6 +191,14 @@ function pasteHTML( e, editor, pasted, start, end ) {
 	}
 
 	editor.setSelectionRange( newPos, newPos );
+}
+
+function insertText( text, editor, start, end ) {
+	if ( isFirefox ) {
+		editor.value = editor.value.slice( 0, start ) + text + editor.value.slice( end );
+	} else {
+		document.execCommand( 'insertText', false, text );
+	}
 }
 
 function domainCheck( site ) {
