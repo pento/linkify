@@ -1,9 +1,9 @@
 {
 	"manifest_version": 2,
-	"name": "<%= package.name %>",
-	"version": "<%= package.version %>",
+	"name": "",
+	"version": "",
 
-	"description": "<%= package.description %>",
+	"description": "",
 	"icons": {
 		 "16": "images/linkify-ico-16.png",
 		 "48": "images/linkify-ico-48.png",

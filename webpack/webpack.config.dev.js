@@ -1,10 +1,10 @@
 const _ = require('lodash');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const VersionFilePlugin = require('webpack-version-file-plugin');
+const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 
 const config = require('./config.js');
-
+const pkg = require('../package.json');
 
 module.exports = _.merge({}, config, {
   output: {
@@ -19,11 +19,21 @@ module.exports = _.merge({}, config, {
       ignore: ['js/**/*', 'manifest.json'],
       copyUnmodified: false
     }),
-    new VersionFilePlugin({
-      packageFile: path.resolve(__dirname, '../package.json'),
-      template: path.resolve(__dirname, '../src/manifest.json'),
-      outputFile: path.resolve(__dirname, '../build/dev/manifest.json'),
-    })
+    new GenerateJsonPlugin(
+      'manifest.json',
+      require('../src/manifest.json'),
+      ( key, value ) => {
+        if( key ) {
+          return value;
+        }
+
+        value.name = pkg.name;
+        value.version = pkg.version;
+        value.description = pkg.description;
+
+        return value;
+      }
+    ),
   ],
   watch: true
 });

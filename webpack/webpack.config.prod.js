@@ -3,7 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ZipWebpackPlugin = require('zip-webpack-plugin');
-const VersionFilePlugin = require('webpack-version-file-plugin');
+const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const CrxPlugin = require('crx-webpack-plugin');
 
 const config = require('./config.js');
@@ -25,11 +25,21 @@ module.exports = _.merge({}, config, {
       ignore: ['js/**/*', 'manifest.json'],
       copyUnmodified: true
     }),
-    new VersionFilePlugin({
-      packageFile: path.resolve(__dirname, '../package.json'),
-      template: path.resolve(__dirname, '../src/manifest.json'),
-      outputFile: path.resolve(__dirname, '../build/prod/manifest.json'),
-    }),
+    new GenerateJsonPlugin(
+      'manifest.json',
+      require('../src/manifest.json'),
+      ( key, value ) => {
+        if( key ) {
+          return value;
+        }
+
+        value.name = pkg.name;
+        value.version = pkg.version;
+        value.description = pkg.description;
+
+        return value;
+      }
+    ),
     new CrxPlugin({
       keyFile: '../mykey.pem',
       contentPath: '../build/prod',
