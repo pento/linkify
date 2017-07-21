@@ -19,6 +19,12 @@
 
 	"content_security_policy": "script-src 'self'; object-src 'self'",
 	"permissions": [ "<all_urls>" ],
-	"web_accessible_resources": [ "js/*", "html/*", "css/*", "images/*" ]
+	"web_accessible_resources": [ "js/*", "html/*", "css/*", "images/*" ],
+
+	"applications": {
+	  "gecko": {
+	    "id": "{a7f5bd94-1e41-4cbb-a49b-e2e10a30587e}"
+	  }
+	}
 }
 
