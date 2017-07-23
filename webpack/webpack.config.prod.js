@@ -66,7 +66,7 @@ module.exports = _.merge({}, config, {
       path: '..',
       filename: pkg.name
     }),
-    /*new WebpackWebExt({
+    new WebpackWebExt({
       runOnce: false,
       argv: [
         "sign",
@@ -74,6 +74,6 @@ module.exports = _.merge({}, config, {
         "--api-secret", mozilla.apisecret,
         "--source-dir", "./build/prod",
         "--artifacts-dir", "./build" ],
-    }),*/
+    }),
   ]
 });
