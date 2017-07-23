@@ -17,7 +17,6 @@
 		}
 	],
 
-	"content_security_policy": "script-src 'self'; object-src 'self'",
 	"permissions": [ "<all_urls>" ],
 	"web_accessible_resources": [ "js/*", "html/*", "css/*", "images/*" ],
 
