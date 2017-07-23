@@ -13,24 +13,30 @@
 				<th>Domain</th>
 				<th>Format</th>
 			</tr>
-			<tr v-for="rule in rules">
-				<td>{{ rule.url }}</td>
-				<td>{{ rule.replace }}</td>
-				<td>
-					<button>X</button>
-				</td>
-			</tr>
+			<CustomUrlTableRow
+				v-for="rule in rules"
+				:key="rule.id"
+				:rule="rule">
+			</CustomUrlTableRow>
 		</table>
 	</div>
 </template>
 
 <script>
+	/**
+	 * Internal dependencies
+	 */
+	import CustomUrlTableRow from 'components/custom-url-table-row';
+
 	export default {
 		name: 'custom-url-table',
 		computed: {
 			rules() {
 				return this.$store.state.rules;
 			}
-		}
+		},
+		components: {
+			CustomUrlTableRow,
+		},
 	}
 </script>
