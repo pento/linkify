@@ -38,7 +38,9 @@
     "webpack-dev-server": "1.16.2",
     "webpack-node-externals": "1.5.4",
     "zip-webpack-plugin": "2.0.0",
-    "generate-json-webpack-plugin": "0.2.1"
+    "generate-json-webpack-plugin": "0.2.1",
+    "vue": "^2.4.2",
+    "vue-loader": "^13.0.2"
   },
   "export-symbol": "extensionLinkify.exports"
 }
