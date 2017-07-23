@@ -7,10 +7,12 @@ import Vue from 'vue';
  * Internal dependencies
  */
 import Options from 'blocks/options';
+import store from 'store';
 
 window.addEventListener( 'load', () => {
-	new Vue({
+	new Vue( {
 		el: '#app',
+		store,
 		render: h => h(Options),
-	});
-});
+	} );
+} );

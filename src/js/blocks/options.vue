@@ -1,6 +1,6 @@
 <template>
 	<div id="options">
-		<CustomUrlTable :rules="rules"></CustomUrlTable>
+		<CustomUrlTable></CustomUrlTable>
 	</div>
 </template>
 
@@ -14,17 +14,6 @@
 		name: 'options',
 		components: {
 			CustomUrlTable,
-		},
-		data: () => {
-			return {
-				rules: [
-					{
-						id: "lolwhee",
-						url: "src.wordpress-develop.dev",
-						replace: "lol %url HAHAHA %text %text %url 👍🏻"
-					}
-				]
-			};
 		},
 	};
 </script>

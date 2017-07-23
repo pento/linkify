@@ -26,10 +26,10 @@
 
 <script>
 	export default {
-		props: {
-			rules: {
-				type: Array,
-				required: true,
+		name: 'custom-url-table',
+		computed: {
+			rules() {
+				return this.$store.state.rules;
 			}
 		}
 	}
