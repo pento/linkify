@@ -9,7 +9,7 @@ const WebpackWebExt = require('webpack-webext-plugin');
 
 const config = require('./config.js');
 const pkg = require('../package.json');
-const mozilla = require('../mozilla.json');
+//const mozilla = require('../mozilla.json');
 
 const appName = `${pkg.name}-${pkg.version}`;
 
@@ -42,12 +42,12 @@ module.exports = _.merge({}, config, {
         return value;
       }
     ),
-    new CrxPlugin({
+    /*new CrxPlugin({
       keyFile: '../mykey.pem',
       contentPath: '../build/prod',
       outputPath: '../build',
       name: appName
-    }),
+    }),*/
     new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
@@ -66,7 +66,7 @@ module.exports = _.merge({}, config, {
       path: '..',
       filename: pkg.name
     }),
-    new WebpackWebExt({
+    /*new WebpackWebExt({
       runOnce: false,
       argv: [
         "sign",
@@ -74,6 +74,6 @@ module.exports = _.merge({}, config, {
         "--api-secret", mozilla.apisecret,
         "--source-dir", "./build/prod",
         "--artifacts-dir", "./build" ],
-    }),
+    }),*/
   ]
 });
