@@ -1,6 +1,6 @@
 {
   "name": "Linkify",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Automatically transform pasted URLs into links.",
   "repository": "pento/linkify",
   "license": "GPL-3.0+",
