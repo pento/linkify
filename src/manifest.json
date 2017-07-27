@@ -18,7 +18,6 @@
 	],
 
 	"permissions": [ "<all_urls>" ],
-	"web_accessible_resources": [ "js/*", "html/*", "css/*", "images/*" ],
 
 	"applications": {
 	  "gecko": {
