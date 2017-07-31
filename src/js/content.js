@@ -1,4 +1,4 @@
-var shiftPressed = false;
+let shiftPressed = false;
 
 function pasteHandler( e ) {
 	if ( shiftPressed ) {
@@ -9,7 +9,7 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	var pasted = e.clipboardData.getData( 'text/plain' );
+	const pasted = e.clipboardData.getData( 'text/plain' );
 	if ( '' === pasted ) {
 		return;
 	}
@@ -18,7 +18,7 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	var editor = e.target;
+	const editor = e.target;
 
 	if ( ! editor ) {
 		return;
@@ -35,14 +35,14 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	var inputTypeAllowed = false;
+	let inputTypeAllowed = false;
 
 	if ( 'TEXTAREA' === editor.nodeName ) {
 		inputTypeAllowed = true;
 	}
 
 	// Normally we don't want to do this on <input> tags, but there are exceptions.
-	var inputElementSites = [
+	const inputElementSites = [
 		'teuxdeux.com'
 	];
 
@@ -54,7 +54,7 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	var start, end;
+	let start, end;
 
 	if ( editor.selectionStart > editor.selectionEnd ) {
 		start = editor.selectionEnd;
@@ -69,20 +69,23 @@ function pasteHandler( e ) {
 		return;
 	}
 
-	var markdownSites = [
+	const markdownSites = [
 		'hackerone.com',
 		'github.com',
 		'reddit.com',
 		'teuxdeux.com'
 	];
 
-	var bbCodeEl = document.getElementById( 'disable_bbcode' );
+	let bbCodeEl = document.getElementById( 'disable_bbcode' );
 	if ( ! bbCodeEl ) {
 		bbCodeEl = document.getElementsByClassName( 'show_bbcode' ).item( 0 );
 	}
 
-	var tracForm = document.getElementById( 'propertyform' );
-	if( tracForm && ( tracForm.getAttribute( 'action' ).indexOf( '/newticket' ) >= 0 || tracForm.getAttribute( 'action' ).indexOf( '/ticket/' ) >= 0 ) ) {
+	const tracForm = document.getElementById( 'propertyform' );
+	if ( tracForm &&
+			( tracForm.getAttribute( 'action' ).indexOf( '/newticket' ) >= 0 ||
+				tracForm.getAttribute( 'action' ).indexOf( '/ticket/' ) >= 0 )
+	) {
 		pasteTrac( e, editor, pasted, start, end );
 	} else if ( markdownSites.find( domainCheck ) ) {
 		pasteMarkdown( e, editor, pasted, start, end );
@@ -103,7 +106,7 @@ function pasteTrac( e, editor, pasted, start, end ) {
 	e.preventDefault();
 	document.execCommand( 'insertText', false, '[' + pasted + ' ' + editor.value.slice( start, end ) + ']' );
 
-	var newPos;
+	let newPos;
 
 	if ( start === end ) {
 		newPos = start + pasted.length + 2;
@@ -118,7 +121,7 @@ function pasteMarkdown( e, editor, pasted, start, end ) {
 	e.preventDefault();
 	document.execCommand( 'insertText', false, '[' + editor.value.slice( start, end ) + '](' + pasted + ')' );
 
-	var newPos;
+	let newPos;
 
 	if ( start === end ) {
 		newPos = start + 1;
@@ -133,7 +136,7 @@ function pasteBBcode( e, editor, pasted, start, end ) {
 	e.preventDefault();
 	document.execCommand( 'insertText', false, '[url=' + pasted + ']' + editor.value.slice( start, end ) + '[/url]' );
 
-	var newPos;
+	let newPos;
 
 	if ( start === end ) {
 		newPos = start + pasted.length + 6;
@@ -148,7 +151,7 @@ function pasteRemarkup( e, editor, pasted, start, end ) {
 	e.preventDefault();
 	document.execCommand( 'insertText', false, '[[ ' + pasted + ' | ' + editor.value.slice( start, end ) + ' ]]' );
 
-	var newPos;
+	let newPos;
 
 	if ( start === end ) {
 		newPos = start + pasted.length + 6;
@@ -161,7 +164,7 @@ function pasteRemarkup( e, editor, pasted, start, end ) {
 
 function pasteHTML( e, editor, pasted, start, end ) {
 	// Make sure we are not in a tag first
-	var leftString = editor.value.slice( 0, start ).toLowerCase();
+	const leftString = editor.value.slice( 0, start ).toLowerCase();
 
 	// If we are inside a (start) tag for any HTML element, its not ok to paste as a an a-href
 	if ( ( -1 < leftString.lastIndexOf( '<' ) ) && ( leftString.lastIndexOf( '<' ) > leftString.lastIndexOf( '>' ) ) ) {
@@ -177,7 +180,7 @@ function pasteHTML( e, editor, pasted, start, end ) {
 	e.preventDefault();
 	document.execCommand( 'insertText', false, '<a href="' + pasted + '">' + editor.value.slice( start, end ) + '</a>' );
 
-	var newPos;
+	let newPos;
 
 	if ( start === end ) {
 		newPos = start + pasted.length + 11;
@@ -193,9 +196,9 @@ function domainCheck( site ) {
 }
 
 // Don't bother attaching the paste event if we're on a site we don't want to run on.
-var attach = true;
+let attach = true;
 
-var blockedSites = [
+const blockedSites = [
 	'gist.github.com',
 	'facebook.com',
 	'slack.com',
