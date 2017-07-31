@@ -1,6 +1,8 @@
 Linkify
 =======
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/pento/linkify.svg)](https://greenkeeper.io/)
+
 WordPress has an excellent feature, where pasting a URL onto selected text will automatically transform that text into a link.
 
 Now you can do it everywhere!
