@@ -146,14 +146,14 @@ function pasteBBcode( e, editor, pasted, start, end ) {
 
 function pasteRemarkup( e, editor, pasted, start, end ) {
 	e.preventDefault();
-	document.execCommand( 'insertText', false, '[[ ' + pasted + ' || ' + editor.value.slice( start, end ) + ' ]]' );
+	document.execCommand( 'insertText', false, '[[ ' + pasted + ' | ' + editor.value.slice( start, end ) + ' ]]' );
 
 	var newPos;
 
 	if ( start === end ) {
-		newPos = start + pasted.length + 7;
+		newPos = start + pasted.length + 6;
 	} else {
-		newPos = end + pasted.length + 10;
+		newPos = end + pasted.length + 9;
 	}
 
 	editor.setSelectionRange( newPos, newPos );
