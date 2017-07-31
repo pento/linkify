@@ -70,6 +70,7 @@ function pasteHandler( e ) {
 	}
 
 	var markdownSites = [
+		'hackerone.com',
 		'github.com',
 		'reddit.com',
 		'teuxdeux.com'
