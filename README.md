@@ -18,10 +18,7 @@ Now you can do it everywhere!
 ## Development
 
 ### Installation
-    git@github.com:pento/linkify.git
-
-    # If you don't have webpack installed:
-    npm install -g webpack
+    git clone git@github.com:pento/linkify.git
 
 ### Build instructions
 
