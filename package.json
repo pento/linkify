@@ -2,6 +2,8 @@
   "name": "Linkify",
   "version": "0.6.0",
   "description": "Automatically transform pasted URLs into links.",
+  "repository": "pento/linkify",
+  "license": "GPL-3.0+",
   "engines": {
     "node": "7.0.0",
     "npm": "3.10.8"
@@ -14,8 +16,6 @@
     "test:ci": "mocha-webpack --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
     "travis": "npm run lint && npm run test:ci"
   },
-  "dependencies": {
-  },
   "devDependencies": {
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
@@ -26,21 +26,17 @@
     "babel-preset-stage-2": "6.24.1",
     "copy-webpack-plugin": "4.0.1",
     "crx-webpack-plugin": "0.1.5",
-    "css-loader": "0.28.4",
     "eslint": "4.3.0",
     "eslint-config-wpcalypso": "0.8.0",
-    "eslint-eslines": "0.0.3",
     "eslint-plugin-react": "7.1.0",
     "eslint-plugin-wpcalypso": "3.4.0",
-    "eventemitter2": "4.1.2",
+    "generate-json-webpack-plugin": "0.2.1",
+    "lodash": "4.17.4",
     "mocha": "3.4.2",
     "mocha-webpack": "0.7.0",
-    "sinon": "2.4.1",
     "webpack": "3.4.1",
-    "webpack-dev-server": "2.6.1",
     "webpack-node-externals": "1.6.0",
-    "zip-webpack-plugin": "2.0.0",
-    "generate-json-webpack-plugin": "0.2.1"
+    "zip-webpack-plugin": "2.0.0"
   },
   "export-symbol": "extensionLinkify.exports"
 }
