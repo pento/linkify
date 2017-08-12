@@ -1,6 +1,6 @@
 {
   "name": "Linkify",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "description": "Automatically transform pasted URLs into links.",
   "repository": "pento/linkify",
   "license": "GPL-3.0+",
@@ -9,7 +9,7 @@
     "npm": "3.10.8"
   },
   "scripts": {
-    "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js && cp ./build/$npm_package_name-$npm_package_version.crx ./dist/$npm_package_name.crx",
+    "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js && cp ./build/$npm_package_name-$npm_package_version.crx ./dist/$npm_package_name.crx && cp ./build/$npm_package_name-$npm_package_version-an+fx.xpi ./dist/$npm_package_name.xpi",
     "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
     "lint": "eslint src/js/",
     "test": "mocha-webpack --watch --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
@@ -36,6 +36,7 @@
     "mocha-webpack": "0.7.0",
     "webpack": "3.5.4",
     "webpack-node-externals": "1.6.0",
+    "webpack-webext-plugin": "rpl/webpack-webext-plugin",
     "zip-webpack-plugin": "2.0.0"
   },
   "export-symbol": "extensionLinkify.exports"
