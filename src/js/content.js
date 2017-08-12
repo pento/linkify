@@ -1,6 +1,6 @@
 let shiftPressed = false;
 
-var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+const isFirefox = navigator.userAgent.toLowerCase().indexOf( 'firefox' ) > -1;
 
 function pasteHandler( e ) {
 	if ( shiftPressed ) {
