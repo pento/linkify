@@ -27,7 +27,7 @@
     "copy-webpack-plugin": "4.0.1",
     "crx-webpack-plugin": "0.1.5",
     "eslint": "4.6.1",
-    "eslint-config-wpcalypso": "0.8.0",
+    "eslint-config-wpcalypso": "1.0.0",
     "eslint-plugin-react": "7.3.0",
     "eslint-plugin-wpcalypso": "3.4.1",
     "generate-json-webpack-plugin": "0.2.2",
