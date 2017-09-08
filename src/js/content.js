@@ -45,7 +45,7 @@ function pasteHandler( e ) {
 
 	// Normally we don't want to do this on <input> tags, but there are exceptions.
 	const inputElementSites = [
-		'teuxdeux.com'
+		'teuxdeux.com',
 	];
 
 	if ( 'INPUT' === editor.nodeName && 'text' === editor.type && inputElementSites.find( domainCheck ) ) {
@@ -75,7 +75,7 @@ function pasteHandler( e ) {
 		'hackerone.com',
 		'github.com',
 		'reddit.com',
-		'teuxdeux.com'
+		'teuxdeux.com',
 	];
 
 	let bbCodeEl = document.getElementById( 'disable_bbcode' );
@@ -213,7 +213,7 @@ const blockedSites = [
 	'facebook.com',
 	'slack.com',
 	'twitter.com',
-	'whatsapp.com'
+	'whatsapp.com',
 ];
 
 if ( undefined !== blockedSites.find( domainCheck ) ) {
