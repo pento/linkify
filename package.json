@@ -32,7 +32,7 @@
     "eslint-plugin-wpcalypso": "4.0.0",
     "generate-json-webpack-plugin": "0.2.2",
     "lodash": "4.17.4",
-    "mocha": "3.5.2",
+    "mocha": "3.5.3",
     "mocha-webpack": "0.7.0",
     "webpack": "3.5.6",
     "webpack-node-externals": "1.6.0",
