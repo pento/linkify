@@ -26,7 +26,7 @@
     "babel-preset-stage-2": "6.24.1",
     "copy-webpack-plugin": "4.0.1",
     "crx-webpack-plugin": "0.1.5",
-    "eslint": "4.7.0",
+    "eslint": "4.7.1",
     "eslint-config-wpcalypso": "1.0.0",
     "eslint-plugin-react": "7.3.0",
     "eslint-plugin-wpcalypso": "4.0.0",
