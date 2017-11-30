@@ -34,7 +34,7 @@
     "lodash": "4.17.4",
     "mocha": "4.0.1",
     "mocha-webpack": "1.0.0",
-    "webpack": "3.8.0",
+    "webpack": "3.9.0",
     "webpack-node-externals": "1.6.0",
     "webpack-webext-plugin": "rpl/webpack-webext-plugin",
     "zip-webpack-plugin": "2.1.0"
