@@ -28,7 +28,7 @@
     "crx-webpack-plugin": "0.1.5",
     "eslint": "4.18.1",
     "eslint-config-wpcalypso": "2.0.0",
-    "eslint-plugin-react": "7.6.0",
+    "eslint-plugin-react": "7.6.1",
     "eslint-plugin-wpcalypso": "4.0.1",
     "generate-json-webpack-plugin": "0.2.2",
     "lodash": "4.17.4",
