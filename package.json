@@ -33,7 +33,7 @@
     "generate-json-webpack-plugin": "0.3.0",
     "lodash": "4.17.5",
     "mocha": "5.1.0",
-    "mocha-webpack": "1.0.0",
+    "mocha-webpack": "1.1.0",
     "webpack": "3.11.0",
     "webpack-node-externals": "1.7.2",
     "webpack-webext-plugin": "rpl/webpack-webext-plugin",
