@@ -1,43 +1,56 @@
 {
-  "name": "Linkify",
-  "version": "0.6.2",
-  "description": "Automatically transform pasted URLs into links.",
-  "repository": "pento/linkify",
-  "license": "GPL-3.0+",
-  "engines": {
-    "node": "7.0.0",
-    "npm": "3.10.8"
-  },
-  "scripts": {
-    "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js && cp ./build/$npm_package_name-$npm_package_version.crx ./dist/$npm_package_name.crx && cp ./build/$npm_package_name-$npm_package_version-an+fx.xpi ./dist/$npm_package_name.xpi",
-    "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
-    "lint": "eslint src/js/",
-    "test": "mocha-webpack --watch --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
-    "test:ci": "mocha-webpack --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
-    "travis": "npm run lint && npm run test:ci"
-  },
-  "devDependencies": {
-    "babel-core": "6.26.0",
-    "babel-eslint": "8.2.3",
-    "babel-loader": "7.1.4",
-    "babel-plugin-module-resolver": "3.1.1",
-    "babel-plugin-transform-runtime": "6.23.0",
-    "babel-preset-es2015": "6.24.1",
-    "babel-preset-stage-2": "6.24.1",
-    "copy-webpack-plugin": "4.5.1",
-    "crx-webpack-plugin": "0.1.5",
-    "eslint": "4.19.1",
-    "eslint-config-wpcalypso": "2.0.0",
-    "eslint-plugin-react": "7.7.0",
-    "eslint-plugin-wpcalypso": "4.0.1",
-    "generate-json-webpack-plugin": "0.3.0",
-    "lodash": "4.17.5",
-    "mocha": "5.1.1",
-    "mocha-webpack": "1.1.0",
-    "webpack": "3.11.0",
-    "webpack-node-externals": "1.7.2",
-    "webpack-webext-plugin": "rpl/webpack-webext-plugin",
-    "zip-webpack-plugin": "3.0.0"
-  },
-  "export-symbol": "extensionLinkify.exports"
+	"private": true,
+	"scripts": {
+		"build": "parcel build src/manifest.json --no-content-hash --no-source-maps --dist-dir distribution --no-cache --detailed-report 0",
+		"lint": "run-p lint:*",
+		"lint-fix": "run-p 'lint:* -- --fix'",
+		"lint:css": "stylelint src/**/*.css",
+		"lint:js": "xo",
+		"test": "run-p lint:* build",
+		"watch": "parcel watch src/manifest.json --dist-dir distribution --no-cache --no-hmr"
+	},
+	"browserslist": [
+		"last 1 Chrome version",
+		"last 1 Firefox version"
+	],
+	"xo": {
+		"envs": [
+			"browser"
+		],
+		"rules": {
+			"no-unused-vars": [
+				"error",
+				{
+					"varsIgnorePattern": "browser"
+				}
+			]
+		}
+	},
+	"stylelint": {
+		"extends": "stylelint-config-xo"
+	},
+	"dependencies": {
+		"webext-options-sync": "^2.0.1",
+		"webextension-polyfill": "^0.7.0"
+	},
+	"devDependencies": {
+		"@parcel/config-webextension": "^2.0.0-nightly.2220",
+		"@parcel/optimizer-cssnano": "^2.0.0-nightly.599",
+		"@parcel/optimizer-htmlnano": "^2.0.0-nightly.599",
+		"@parcel/packager-css": "^2.0.0-nightly.599",
+		"@parcel/packager-html": "^2.0.0-nightly.599",
+		"@parcel/transformer-css": "^2.0.0-nightly.599",
+		"@parcel/transformer-html": "^2.0.0-nightly.598",
+		"@parcel/transformer-postcss": "^2.0.0-nightly.599",
+		"@parcel/transformer-posthtml": "^2.0.0-nightly.598",
+		"@parcel/transformer-webextension": "^2.0.0-nightly.2220",
+		"npm-run-all": "^4.1.5",
+		"parcel": "^2.0.0-nightly.596",
+		"stylelint": "^13.10.0",
+		"stylelint-config-xo": "^0.20.0",
+		"xo": "^0.37.1"
+	},
+	"webExt": {
+		"sourceDir": "distribution"
+	}
 }
