@@ -71,7 +71,8 @@ function pasteHandler(event) {
 		'hackerone.com',
 		'github.com',
 		'reddit.com',
-		'teuxdeux.com'
+		'teuxdeux.com',
+		'trello.com'
 	];
 
 	let bbCodeElement = document.querySelector('#disable_bbcode');
