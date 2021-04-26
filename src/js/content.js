@@ -1,64 +1,65 @@
 let shiftPressed = false;
 
-const isFirefox = navigator.userAgent.toLowerCase().indexOf( 'firefox' ) > -1;
+const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
 
-function pasteHandler( e ) {
-	if ( shiftPressed ) {
+function pasteHandler(event) {
+	if (shiftPressed) {
 		return;
 	}
 
-	if ( 'undefined' === typeof( e.clipboardData ) ) {
+	if (typeof (event.clipboardData) === 'undefined') {
 		return;
 	}
 
-	const pasted = e.clipboardData.getData( 'text/plain' );
-	if ( '' === pasted ) {
+	const pasted = event.clipboardData.getData('text/plain');
+	if (pasted === '') {
 		return;
 	}
 
-	if ( ! pasted.match( /^https?:\/\//i ) ) {
+	if (!pasted.match(/^https?:\/\//i)) {
 		return;
 	}
 
-	const editor = e.target;
+	const editor = event.target;
 
-	if ( ! editor ) {
+	if (!editor) {
 		return;
 	}
 
 	// Don't run in WordPress' Gutenberg editor.
-	if ( editor.closest( '.gutenberg' ) ) {
+	if (editor.closest('.gutenberg')) {
 		return;
 	}
 
-	if ( editor.isContentEditable ) {
-		e.preventDefault();
-		document.execCommand( 'createLink', false, pasted );
+	if (editor.isContentEditable) {
+		event.preventDefault();
+		document.execCommand('createLink', false, pasted);
 		return;
 	}
 
 	let inputTypeAllowed = false;
 
-	if ( 'TEXTAREA' === editor.nodeName ) {
+	if (editor.nodeName === 'TEXTAREA') {
 		inputTypeAllowed = true;
 	}
 
 	// Normally we don't want to do this on <input> tags, but there are exceptions.
 	const inputElementSites = [
-		'teuxdeux.com',
+		'teuxdeux.com'
 	];
 
-	if ( 'INPUT' === editor.nodeName && 'text' === editor.type && inputElementSites.find( domainCheck ) ) {
+	if (editor.nodeName === 'INPUT' && editor.type === 'text' && inputElementSites.some(site => document.domain.includes(site))) {
 		inputTypeAllowed = true;
 	}
 
-	if ( ! inputTypeAllowed ) {
+	if (!inputTypeAllowed) {
 		return;
 	}
 
-	let start, end;
+	let start;
+	let end;
 
-	if ( editor.selectionStart > editor.selectionEnd ) {
+	if (editor.selectionStart > editor.selectionEnd) {
 		start = editor.selectionEnd;
 		end = editor.selectionStart;
 	} else {
@@ -67,7 +68,7 @@ function pasteHandler( e ) {
 	}
 
 	// If the current selection is also a URL, assume we want to replace it (not wrap it in an anchor)
-	if ( editor.value.slice( start, end ).match( /^https?:\/\/[^\s]*$/i ) ) {
+	if (editor.value.slice(start, end).match(/^https?:\/\/\S*$/i)) {
 		return;
 	}
 
@@ -75,134 +76,100 @@ function pasteHandler( e ) {
 		'hackerone.com',
 		'github.com',
 		'reddit.com',
-		'teuxdeux.com',
+		'teuxdeux.com'
 	];
 
-	let bbCodeEl = document.getElementById( 'disable_bbcode' );
-	if ( ! bbCodeEl ) {
-		bbCodeEl = document.getElementsByClassName( 'show_bbcode' ).item( 0 );
+	let bbCodeElement = document.querySelector('#disable_bbcode');
+	if (!bbCodeElement) {
+		bbCodeElement = document.querySelectorAll('.show_bbcode').item(0);
 	}
 
-	const tracForm = document.getElementById( 'propertyform' );
-	if ( tracForm &&
-			( tracForm.getAttribute( 'action' ).indexOf( '/newticket' ) >= 0 ||
-				tracForm.getAttribute( 'action' ).indexOf( '/ticket/' ) >= 0 )
+	const tracForm = document.querySelector('#propertyform');
+	if (tracForm &&
+			(tracForm.getAttribute('action').includes('/newticket') ||
+				tracForm.getAttribute('action').includes('/ticket/'))
 	) {
-		pasteTrac( e, editor, pasted, start, end );
-	} else if ( markdownSites.find( domainCheck ) ) {
-		pasteMarkdown( e, editor, pasted, start, end );
-	} else if ( bbCodeEl ) {
-		pasteBBcode( e, editor, pasted, start, end );
-	} else if ( editor.classList.contains( 'remarkup-assist-textarea' ) ) {
-		pasteRemarkup( e, editor, pasted, start, end );
+		pasteTrac(event, editor, pasted, start, end);
+	} else if (markdownSites.some(site => document.domain.includes(site))) {
+		pasteMarkdown(event, editor, pasted, start, end);
+	} else if (bbCodeElement) {
+		pasteBBcode(event, editor, pasted, start, end);
+	} else if (editor.classList.contains('remarkup-assist-textarea')) {
+		pasteRemarkup(event, editor, pasted, start, end);
 	} else {
-		pasteHTML( e, editor, pasted, start, end );
+		pasteHTML(event, editor, pasted, start, end);
 	}
 }
 
-function shiftChecker( e ) {
-	shiftPressed = e.shiftKey;
+function shiftChecker(event) {
+	shiftPressed = event.shiftKey;
 }
 
-function pasteTrac( e, editor, pasted, start, end ) {
-	e.preventDefault();
-	insertText( '[' + pasted + ' ' + editor.value.slice( start, end ) + ']', editor, start, end );
+function pasteTrac(event, editor, pasted, start, end) {
+	event.preventDefault();
+	insertText('[' + pasted + ' ' + editor.value.slice(start, end) + ']', editor, start, end);
 
-	let newPos;
+	const newPos = start === end ? start + pasted.length + 2 : end + pasted.length + 3;
 
-	if ( start === end ) {
-		newPos = start + pasted.length + 2;
-	} else {
-		newPos = end + pasted.length + 3;
-	}
-
-	editor.setSelectionRange( newPos, newPos );
+	editor.setSelectionRange(newPos, newPos);
 }
 
-function pasteMarkdown( e, editor, pasted, start, end ) {
-	e.preventDefault();
-	insertText( '[' + editor.value.slice( start, end ) + '](' + pasted + ')', editor, start, end );
+function pasteMarkdown(event, editor, pasted, start, end) {
+	event.preventDefault();
+	insertText('[' + editor.value.slice(start, end) + '](' + pasted + ')', editor, start, end);
 
-	let newPos;
+	const newPos = start === end ? start + 1 : end + pasted.length + 4;
 
-	if ( start === end ) {
-		newPos = start + 1;
-	} else {
-		newPos = end + pasted.length + 4;
-	}
-
-	editor.setSelectionRange( newPos, newPos );
+	editor.setSelectionRange(newPos, newPos);
 }
 
-function pasteBBcode( e, editor, pasted, start, end ) {
-	e.preventDefault();
-	insertText( '[url=' + pasted + ']' + editor.value.slice( start, end ) + '[/url]', editor, start, end );
+function pasteBBcode(event, editor, pasted, start, end) {
+	event.preventDefault();
+	insertText('[url=' + pasted + ']' + editor.value.slice(start, end) + '[/url]', editor, start, end);
 
-	let newPos;
+	const newPos = start === end ? start + pasted.length + 6 : end + pasted.length + 12;
 
-	if ( start === end ) {
-		newPos = start + pasted.length + 6;
-	} else {
-		newPos = end + pasted.length + 12;
-	}
-
-	editor.setSelectionRange( newPos, newPos );
+	editor.setSelectionRange(newPos, newPos);
 }
 
-function pasteRemarkup( e, editor, pasted, start, end ) {
-	e.preventDefault();
-	insertText( '[[ ' + pasted + ' | ' + editor.value.slice( start, end ) + ' ]]', editor, start, end );
+function pasteRemarkup(event, editor, pasted, start, end) {
+	event.preventDefault();
+	insertText('[[ ' + pasted + ' | ' + editor.value.slice(start, end) + ' ]]', editor, start, end);
 
-	let newPos;
+	const newPos = start === end ? start + pasted.length + 6 : end + pasted.length + 9;
 
-	if ( start === end ) {
-		newPos = start + pasted.length + 6;
-	} else {
-		newPos = end + pasted.length + 9;
-	}
-
-	editor.setSelectionRange( newPos, newPos );
+	editor.setSelectionRange(newPos, newPos);
 }
 
-function pasteHTML( e, editor, pasted, start, end ) {
+function pasteHTML(event, editor, pasted, start, end) {
 	// Make sure we are not in a tag first
-	const leftString = editor.value.slice( 0, start ).toLowerCase();
+	const leftString = editor.value.slice(0, start).toLowerCase();
 
 	// If we are inside a (start) tag for any HTML element, its not ok to paste as a an a-href
-	if ( ( -1 < leftString.lastIndexOf( '<' ) ) && ( leftString.lastIndexOf( '<' ) > leftString.lastIndexOf( '>' ) ) ) {
+	if ((leftString.lastIndexOf('<') > -1) && (leftString.lastIndexOf('<') > leftString.lastIndexOf('>'))) {
 		return;
 	}
 
 	// If we are inside an anchor's content, its not ok to paste as a an a-href
-	if ( ( -1 < leftString.lastIndexOf( '<a' ) ) && ( leftString.lastIndexOf( '<a' ) > leftString.lastIndexOf( '</a>' ) ) ) {
+	if ((leftString.lastIndexOf('<a') > -1) && (leftString.lastIndexOf('<a') > leftString.lastIndexOf('</a>'))) {
 		return;
 	}
 
 	// Looks safe, let's do this.
-	e.preventDefault();
-	insertText( '<a href="' + pasted + '">' + editor.value.slice( start, end ) + '</a>', editor, start, end );
+	event.preventDefault();
+	insertText('<a href="' + pasted + '">' + editor.value.slice(start, end) + '</a>', editor, start, end);
 
-	let newPos;
+	const newPos = start === end ? start + pasted.length + 11 : end + pasted.length + 15;
 
-	if ( start === end ) {
-		newPos = start + pasted.length + 11;
-	} else {
-		newPos = end + pasted.length + 15;
-	}
-
-	editor.setSelectionRange( newPos, newPos );
+	editor.setSelectionRange(newPos, newPos);
 }
 
-function insertText( text, editor, start, end ) {
-	if ( isFirefox ) {
-		editor.value = editor.value.slice( 0, start ) + text + editor.value.slice( end );
+function insertText(text, editor, start, end) {
+	if (isFirefox) {
+		editor.value = editor.value.slice(0, start) + text + editor.value.slice(end);
 	} else {
-		document.execCommand( 'insertText', false, text );
+		document.execCommand('insertText', false, text);
 	}
-}
-
-function domainCheck( site ) {
-	return document.domain.includes( site );
 }
 
 // Don't bother attaching the paste event if we're on a site we don't want to run on.
@@ -213,19 +180,19 @@ const blockedSites = [
 	'facebook.com',
 	'slack.com',
 	'twitter.com',
-	'whatsapp.com',
+	'whatsapp.com'
 ];
 
-if ( undefined !== blockedSites.find( domainCheck ) ) {
+if (undefined !== blockedSites.some(site => document.domain.includes(site))) {
 	attach = false;
 }
 
 // Don't load on o2 sites, as they already have this feature.
-if ( document.body.classList.contains( 'o2' ) ) {
+if (document.body.classList.contains('o2')) {
 	attach = false;
 }
 
-if ( attach ) {
-	document.addEventListener( 'paste', pasteHandler );
-	document.addEventListener( 'keydown', shiftChecker );
+if (attach) {
+	document.addEventListener('paste', pasteHandler);
+	document.addEventListener('keydown', shiftChecker);
 }
