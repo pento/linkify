@@ -1,8 +1,6 @@
 Linkify
 =======
 
-[![Build Status](https://travis-ci.org/pento/linkify.svg?branch=master)](https://travis-ci.org/pento/linkify) [![Greenkeeper badge](https://badges.greenkeeper.io/pento/linkify.svg)](https://greenkeeper.io/)
-
 WordPress has an excellent feature, where pasting a URL onto selected text will automatically transform that text into a link.
 
 Now you can do it everywhere!
@@ -31,16 +29,8 @@ To install dependencies:
 
 Then to start a developing session (with watch), run:
 
-    npm start
+    npm watch
 
-This will create an unpacked version of Linkify in the `build/dev` directory, which you can load in Chrome using the `Load unpacked extension...` button in your [Chrome Extensions](chrome://extensions/) page.
+This will create an unpacked version of Linkify in the `distribution` directory, which you can load in Chrome using the `Load unpacked extension...` button in your [Chrome Extensions](chrome://extensions/) page.
 
 ![Linkify running as an unpacked extension, with the `Load unpacked extension...` button displayed](assets/screenshots/load-chrome-extension.png)
-
-To start a unit testing session (with watch):
-
-    npm test
-
-To build production code (requires `mykey.pem` and `mozilla.json`):
-
-    npm run build

@@ -1,9 +1,16 @@
 {
+	"name": "Linkify",
+	"version": "0.0.0",
+	"description": "Automatically transform pasted URLs into links.",
+	"homepage_url": "https://github.com/pento/linkify",
 	"manifest_version": 2,
-	"name": "",
-	"version": "",
-
-	"description": "",
+	"minimum_chrome_version": "74",
+	"applications": {
+		"gecko": {
+			"id": "{a7f5bd94-1e41-4cbb-a49b-e2e10a30587e}",
+			"strict_min_version": "67.0"
+		}
+	},
 	"icons": {
 		 "16": "images/linkify-ico-16.png",
 		 "48": "images/linkify-ico-48.png",
@@ -17,12 +24,6 @@
 		}
 	],
 
-	"permissions": [ "<all_urls>" ],
-
-	"applications": {
-	  "gecko": {
-	    "id": "{a7f5bd94-1e41-4cbb-a49b-e2e10a30587e}"
-	  }
-	}
+	"permissions": [ "<all_urls>" ]
 }
 
