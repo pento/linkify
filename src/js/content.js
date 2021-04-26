@@ -26,11 +26,6 @@ function pasteHandler(event) {
 		return;
 	}
 
-	// Don't run in WordPress' Gutenberg editor.
-	if (editor.closest('.gutenberg')) {
-		return;
-	}
-
 	if (editor.isContentEditable) {
 		event.preventDefault();
 		document.execCommand('createLink', false, pasted);
