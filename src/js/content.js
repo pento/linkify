@@ -183,7 +183,7 @@ const blockedSites = [
 	'whatsapp.com'
 ];
 
-if (undefined !== blockedSites.some(site => document.domain.includes(site))) {
+if (blockedSites.some(site => document.domain.includes(site))) {
 	attach = false;
 }
 
