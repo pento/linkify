@@ -9,11 +9,9 @@ Now you can do it everywhere!
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/linkify/bkkgikibkmalecfagnebbhbacnbhckmh) | [Firefox Extensions](https://addons.mozilla.org/en-US/firefox/addon/linkify-magic-links/)
 
-[Chrome Direct Download](https://github.com/pento/linkify/blob/master/dist/Linkify.crx?raw=true) | [Firefox Direct Download](https://github.com/pento/linkify/blob/master/dist/linkify.xpi?raw=true)
-
 ## Screenshots
 
-![Pasting a link in WordPress' Quick Draft](assets/screenshots/1.png) ![Pasting a link GMail](assets/screenshots/2.png)
+![Pasting a link in WordPress' Quick Draft](assets/screenshots/1.png) ![Pasting a link in GMail](assets/screenshots/2.png)
 
 ## Development
 
