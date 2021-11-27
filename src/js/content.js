@@ -72,7 +72,8 @@ function pasteHandler(event) {
 		'github.com',
 		'reddit.com',
 		'teuxdeux.com',
-		'trello.com'
+		'trello.com',
+		'zendesk.com'
 	];
 
 	let bbCodeElement = document.querySelector('#disable_bbcode');
