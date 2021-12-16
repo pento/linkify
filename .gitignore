@@ -1,0 +1,4 @@
+node_modules
+distribution
+.parcel-cache
+.DS_Store
