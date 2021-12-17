@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Options</title>
+<link rel="stylesheet" href="chrome://global/skin/in-content/common.css">
+<link rel="stylesheet" href="options.css">
+<form id="options-form" class="detail-view-container">
+	<div class="general-options">
+		<h3>General Options</h3>
+		<input type="checkbox" id="createBlankAnchorLink" name="createBlankAnchorLink">
+		<label for="createBlankAnchorLink">Create a blank anchor link when pasting on a blank text area</label>
+	</div>
+	<div class="format-options">
+		<h3>Formats</h3>
+		<label  for="markdownSites">Markdown sites (domain separated by commas):</label>
+		<textarea id="markdownSites" name="markdownSites" rows="3" cols="50"></textarea>
+		<label  for="blockedSites">Blocked sites (domain separated by commas):</label>
+		<textarea id="blockedSites" name="blockedSites" rows="3" cols="50"></textarea>
+	</div>
+</form>
+
+<script src="options.js" type="module"></script>
