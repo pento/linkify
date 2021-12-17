@@ -1,11 +1,10 @@
 import optionsStorage from './options-storage.js';
 
 async function init() {
-
 	const options = await optionsStorage.getAll();
 	const createBlankAnchorLink = options.createBlankAnchorLink;
-	const markdownSites = options.markdownSites.split(",").map(item=>item.trim());
-	const blockedSites = options.blockedSites.split(",").map(item=>item.trim());
+	const markdownSites = options.markdownSites.split(',').map(item => item.trim());
+	const blockedSites = options.blockedSites.split(',').map(item => item.trim());
 
 	let shiftPressed = false;
 	const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
@@ -24,7 +23,7 @@ async function init() {
 			return;
 		}
 
-		if (!pasted.match(/^https?:\/\//i)) {
+		if (!/^https?:\/\//i.test(pasted)) {
 			return;
 		}
 
@@ -48,7 +47,7 @@ async function init() {
 
 		// Normally we don't want to do this on <input> tags, but there are exceptions.
 		const inputElementSites = [
-			'teuxdeux.com'
+			'teuxdeux.com',
 		];
 
 		if (editor.nodeName === 'INPUT' && editor.type === 'text' && inputElementSites.some(site => document.domain.includes(site))) {
@@ -71,17 +70,17 @@ async function init() {
 		}
 
 		// If the current selection is "N/A", assume we want to replace it (not wrap it in an anchor)
-		if (editor.value.slice(start, end).match(/N\/A/g)) {
+		if (/N\/A/g.test(editor.value.slice(start, end))) {
 			return;
 		}
 
 		// If the current selection is also a URL, assume we want to replace it (not wrap it in an anchor)
-		if (editor.value.slice(start, end).match(/^https?:\/\/\S*$/i)) {
+		if (/^https?:\/\/\S*$/i.test(editor.value.slice(start, end))) {
 			return;
 		}
 
 		//  Create a blank anchor link when pasting on a blank text area
-		if ( (start === end) && (createBlankAnchorLink === false) ) {
+		if ((start === end) && (createBlankAnchorLink === false)) {
 			return;
 		}
 
@@ -91,9 +90,9 @@ async function init() {
 		}
 
 		const tracForm = document.querySelector('#propertyform');
-		if (tracForm &&
-				(tracForm.getAttribute('action').includes('/newticket') ||
-					tracForm.getAttribute('action').includes('/ticket/'))
+		if (tracForm
+				&& (tracForm.getAttribute('action').includes('/newticket')
+					|| tracForm.getAttribute('action').includes('/ticket/'))
 		) {
 			pasteTrac(event, editor, pasted, start, end);
 		} else if (markdownSites.some(site => document.domain.includes(site))) {
