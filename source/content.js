@@ -3,7 +3,10 @@ import optionsStorage from './options-storage.js';
 async function init() {
 
 	const options = await optionsStorage.getAll();
-	const textNotSelected = options.textNotSelected;
+	const createBlankAnchorLink = options.createBlankAnchorLink;
+	const markdownSites = options.markdownSites.split(",").map(item=>item.trim());
+	const blockedSites = options.blockedSites.split(",").map(item=>item.trim());
+
 	let shiftPressed = false;
 	const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
 
@@ -77,19 +80,10 @@ async function init() {
 			return;
 		}
 
-		//  Create a blank link when pasting without selected text
-		if ( (start === end) && (textNotSelected === true) ) {
+		//  Create a blank anchor link when pasting on a blank text area
+		if ( (start === end) && (createBlankAnchorLink === false) ) {
 			return;
 		}
-		
-		const markdownSites = [
-			'hackerone.com',
-			'github.com',
-			'reddit.com',
-			'teuxdeux.com',
-			'trello.com',
-			'zendesk.com'
-		];
 
 		let bbCodeElement = document.querySelector('#disable_bbcode');
 		if (!bbCodeElement) {
@@ -186,15 +180,6 @@ async function init() {
 
 	// Don't bother attaching the paste event if we're on a site we don't want to run on.
 	let attach = true;
-
-	const blockedSites = [
-		'gist.github.com',
-		'facebook.com',
-		'slack.com',
-		'twitter.com',
-		'whatsapp.com',
-		'google.com'
-	];
 
 	if (blockedSites.some(site => document.domain.includes(site))) {
 		attach = false;
