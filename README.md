@@ -1,5 +1,4 @@
-Linkify
-=======
+# Linkify
 
 WordPress has an excellent feature, where pasting a URL onto selected text will automatically transform that text into a link.
 
@@ -16,6 +15,7 @@ Now you can do it everywhere!
 ## Development
 
 ### Installation
+
     git clone git@github.com:pento/linkify.git
 
 ### Build instructions
@@ -27,7 +27,7 @@ To install dependencies:
 
 Then to start a developing session (with watch), run:
 
-    npm watch
+    npm run watch
 
 This will create an unpacked version of Linkify in the `distribution` directory, which you can load in Chrome using the `Load unpacked extension...` button in your [Chrome Extensions](chrome://extensions/) page.
 
