@@ -5,6 +5,12 @@
 	"homepage_url": "https://github.com/pento/linkify",
 	"manifest_version": 3,
 	"minimum_chrome_version": "88",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "{a7f5bd94-1e41-4cbb-a49b-e2e10a30587e}",
+			"strict_min_version": "109.0"
+		}
+	},
 	"icons": {
 		 "16": "images/linkify-ico-16.png",
 		 "48": "images/linkify-ico-48.png",
