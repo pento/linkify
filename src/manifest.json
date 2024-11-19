@@ -24,7 +24,7 @@
 		}
 	],
 
-	"permissions": ["clipboardRead", "clipboardWrite"],
+	"permissions": ["clipboardRead"],
 	"host_permissions": [ "*://*/*" ]
 }
 
