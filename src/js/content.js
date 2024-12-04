@@ -3,6 +3,11 @@ let shiftPressed = false;
 const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
 
 function pasteHandler(event) {
+	// We have to wait until the paste event to detect Discourse.
+	if (document.querySelectorAll('.discourse-root').length > 0) {
+		return;
+	}
+
 	if (shiftPressed) {
 		return;
 	}
@@ -183,11 +188,6 @@ if (blockedSites.some(site => document.domain.includes(site))) {
 
 // Don't load on o2 sites, as they already have this feature.
 if (document.body.classList.contains('o2')) {
-	attach = false;
-}
-
-// No need to load in Discourse, as it already has this feature.
-if (document.querySelectorAll('.discourse-root').length > 0) {
 	attach = false;
 }
 
